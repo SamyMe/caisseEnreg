@@ -1,47 +1,17 @@
 from ticket import Ticket
+from catalogue import Catalogue
 
 
 class Caisse(object):
     
-    def __init__(self, catalogue_file="test_data/catalogue.csv"):
-        self.catalogue_file=catalogue_file
-        self.catalogue = {}
-        self._lire_catalogue()
-
+    def __init__(self, prix_file="test_data/prix.csv",
+                        remises_file="test_data/remises.csv"):
+        catalog = Catalogue(prix_file, remises_file)
+        self.catalog_prix, self.catalog_remises = catalog.get_dicts()
         self.tickets = []
 
 
-    def _lire_catalogue(self,):
-        """ Lecture du fichier contenant les produits.
-            Le fichier est donné en argument lors de la 
-            creation de l'instance de la classe. 
-        """
-
-        print('\n* Lecture du catalogue...')
-        with open(self.catalogue_file, 'r') as cat_file:
-            produit = ''
-            prix = ''
-            for row in cat_file.readlines():
-                try:
-                    produit, prix = row.rstrip().split(',')
-                    # Pour faciliter la comparaison
-                    produit = produit.lower()
-
-                    if produit in self.catalogue: 
-                        # Produit dupliqué
-                        raise KeyError
-                    else:
-                        # Introduire au catalogue
-                        self.catalogue[produit] = float(prix)
-
-                except ValueError:
-                    print("[ERREUR CATALOGUE]: Erreure de format dans: {}".format(row))
-                except KeyError:
-                    print("[ERREUR CATALOGUE]: Produit '{}' dupliqué!".format(produit))
-
-
     def introduction_ticket(self,):
-        
         print('\n* Début de saisie...')
         print("""
                 Veuillez entrer les produits sous la forme:
@@ -74,7 +44,7 @@ class Caisse(object):
 
                     produit = saisie[0]
                     quantite = float(saisie[1])
-                    prix = self.catalogue[produit]
+                    prix = self.catalog_prix[produit]
                     
                     ticket.ajout(produit, quantite, prix)
 
