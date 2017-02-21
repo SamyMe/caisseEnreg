@@ -47,7 +47,7 @@ class Caisse(object):
                     prix_u = self.catalog_prix[produit]
                     
                     if produit in self.catalog_remises:
-                        prix, remise, justification = self.appliquer_remises(produit, 
+                        remise, justification = self.appliquer_remises(produit, 
                                                                             quantite, prix_u)
                         ticket.ajout(produit, 
                                 quantite, prix_u, 
@@ -68,21 +68,15 @@ class Caisse(object):
     def appliquer_remises(self, produit, quantite, prix_u):
         condition, cadeau = self.catalog_remises[produit]
         prix_total = prix_u*quantite
+        remise = 0
+        justification = ''
+        
 
-        if quantite > condition:
-            # Condition satisfaite
-            part_1 = condition*prix_u 
+        remise = (quantite//(cadeau+condition))*cadeau*prix_u
+        reste = quantite%(cadeau+condition) - condition
+        remise += reste*prix_u if reste>0 else 0
 
-            # Calculer prix avec reduction
-            part_2 = ((quantite-condition) - cadeau)*prix_u
-            nv_prix = part_1 + (0 if part_2<0 else part_2)
+        justification = "{} acheté(s), {} offert".format(condition, cadeau)
 
-            justification = "{} achete, {} offert".format(condition, cadeau)
-
-            print( prix_total, nv_prix - prix_total, justification)
-            return prix_total, nv_prix - prix_total, justification
-
-        else:
-            # Condition non satisfaite
-            return prix_total, 0, ''
+        return -remise, justification
 
