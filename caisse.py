@@ -40,7 +40,7 @@ class Caisse(object):
                     print("[ERREUR CATALOGUE]: Produit '{}' dupliqué!".format(produit))
 
 
-    def calculate_total(self,):
+    def introduction_ticket(self,):
         
         print('\n* Début de saisie...')
         print("""

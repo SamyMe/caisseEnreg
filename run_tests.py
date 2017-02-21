@@ -4,4 +4,4 @@ print("--- Initialisation ---")
 caisse = Caisse()
 
 print("--- Calcule total ---")
-caisse.calculate_total()
+caisse.introduction_ticket()
