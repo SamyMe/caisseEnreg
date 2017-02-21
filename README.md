@@ -1,0 +1,2 @@
+# caisse
+caisse enregistreuse
