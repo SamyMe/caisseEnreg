@@ -1,5 +1,6 @@
 from ticket import Ticket
 from catalogue import Catalogue
+import os
 
 
 class Caisse(object):
@@ -104,6 +105,21 @@ class Caisse(object):
             Mise a jour des donnée de la caisse.
         """
 
-        self.catalog_prix, self.catalog_remises = self.catalog_manager.maj()
+        texts = { 'prix': "Lien vers fichier des prix (facultatif): ",
+                  'remises': "Lien vers fichier des remises (facultatif): "}
+        paths = {}
+
+        for f in ['prix', 'remises']:
+            recomencer = True
+            while(recomencer):
+                paths[f] = input(" Lien vers fichier des {} (facultatif): ".format(f))
+                if paths[f] == '' or os.path.isfile(paths[f]) == True:
+                    recomencer = False 
+                else:
+                    print("[ERREUR] Chemain erroné!")
+
+
+        self.catalog_prix, self.catalog_remises = self.catalog_manager.maj(
+                                                            paths['prix'], paths['remises'])
 
 
