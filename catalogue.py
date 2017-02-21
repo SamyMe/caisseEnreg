@@ -71,8 +71,3 @@ class Catalogue(object):
                 except KeyError:
                     print("[ERREUR CATALOGUE]: Produit '{}' dupliqué!".format(produit))
 
-if __name__=="__main__":
-    catalog = Catalogue(prix_file="test_data/prix.csv", remises_file="test_data/remises.csv")
-    catalog_prix, catalog_remises = catalog.get_dicts()
-    print(catalog_prix)
-    print(catalog_remises)

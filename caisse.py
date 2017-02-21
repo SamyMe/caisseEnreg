@@ -71,7 +71,7 @@ class Caisse(object):
         remise = 0
         justification = ''
         
-
+        # Calculer nombre de remise appliquable
         remise = (quantite//(cadeau+condition))*cadeau*prix_u
         reste = quantite%(cadeau+condition) - condition
         remise += reste*prix_u if reste>0 else 0

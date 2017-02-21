@@ -34,16 +34,3 @@ class Ticket():
         self.articles.append((produit, quantite, prix, remise, justification))
         self.total += quantite*prix + remise
 
-
-if __name__=="__main__":
-
-    print("- Ticket initialisation")
-    ticket = Ticket()
-    articles = [('a', 2, 2.5), ('b', 3, 1.5)]
-
-    print("- Appending articles")
-    for a in articles:
-        ticket.ajout(a[0], a[1], a[2])
-
-    print("- Printing ticket")
-    print(ticket)
