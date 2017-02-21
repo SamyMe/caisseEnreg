@@ -23,10 +23,10 @@ class Ticket():
         return output_str
         
 
-    def ajout(self, x):
+    def ajout(self, produit, quantite, prix):
         # Ajouter Article
-        self.articles.append(x)
-        self.total += x[1]*x[2]
+        self.articles.append((produit, quantite, prix))
+        self.total += quantite*prix
 
 
 if __name__=="__main__":
@@ -37,7 +37,7 @@ if __name__=="__main__":
 
     print("- Appending articles")
     for a in articles:
-        ticket.ajout(a)
+        ticket.ajout(a[0], a[1], a[2])
 
     print("- Printing ticket")
     print(ticket)

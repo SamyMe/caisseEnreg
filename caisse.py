@@ -1,3 +1,5 @@
+from ticket import Ticket
+
 
 class Caisse(object):
     
@@ -5,6 +7,8 @@ class Caisse(object):
         self.catalogue_file=catalogue_file
         self.catalogue = {}
         self._lire_catalogue()
+
+        self.tickets = []
 
 
     def _lire_catalogue(self,):
@@ -48,24 +52,31 @@ class Caisse(object):
         end_saisie = False
         total_achat = 0
         i = 1
+        ticket = Ticket()
 
         # Boucler sur l'introduction des articles
         while not end_saisie==True:
             saisie = input('Article n°{}: '.format(i))
 
             if 'fin' == saisie.lower():
+                # Fin de saisie du ticket
                 end_saisie = True
-                print("Total: {:.2f}€".format(total_achat))
+
+                # Affichage ticket
+                print(ticket)
+
+                # Sauvegarde du ticket
+                self.tickets.append(ticket)
             else:
                 saisie = saisie.split(',')
 
                 try:
 
                     produit = saisie[0]
-                    quantite = saisie[1]
+                    quantite = float(saisie[1])
                     prix = self.catalogue[produit]
-
-                    total_achat += float(quantite)*prix 
+                    
+                    ticket.ajout(produit, quantite, prix)
 
                 except ValueError:
                     print("[ERREUR]: Quantité mal introduite!!")
