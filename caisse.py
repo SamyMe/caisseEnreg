@@ -1,5 +1,5 @@
 
-class caisse(object):
+class Caisse(object):
     
     def __init__(self, catalogue_file="test_data/catalogue.csv"):
         self.catalogue_file=catalogue_file
@@ -76,7 +76,3 @@ class caisse(object):
 
             i += 1
 
-
-if __name__ == "__main__":
-    c = caisse()
-    c.calculate_total()
