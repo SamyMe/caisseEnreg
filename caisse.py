@@ -44,12 +44,16 @@ class Caisse(object):
 
                     produit = saisie[0]
                     quantite = float(saisie[1])
-                    prix = self.catalog_prix[produit]
+                    prix_u = self.catalog_prix[produit]
                     
                     if produit in self.catalog_remises:
-                        prix = self.appliquer_remises(produit, quantite, prix)
+                        prix, remise, justification = self.appliquer_remises(produit, 
+                                                                            quantite, prix_u)
+                        ticket.ajout(produit, 
+                                quantite, prix_u, 
+                                remise, justification)
                     else:
-                        ticket.ajout(produit, quantite, prix)
+                        ticket.ajout(produit, quantite, prix_u)
 
                 except ValueError:
                     print("[ERREUR]: Quantité mal introduite!!")
@@ -61,18 +65,24 @@ class Caisse(object):
             i += 1
 
 
-    def appliquer_remises(self, produit, quantite, prix):
-        condition, cadreau = self.catalog_remises[produit]
+    def appliquer_remises(self, produit, quantite, prix_u):
+        condition, cadeau = self.catalog_remises[produit]
+        prix_total = prix_u*quantite
 
         if quantite > condition:
             # Condition satisfaite
-            part_1 = condition*prix 
+            part_1 = condition*prix_u 
 
-            # Appliquer la reduction
-            part_2 = ((quantite-condition) - cadeau)*prix
-            return part_1 + (0 if part_2<0 else part2)
+            # Calculer prix avec reduction
+            part_2 = ((quantite-condition) - cadeau)*prix_u
+            nv_prix = part_1 + (0 if part_2<0 else part_2)
+
+            justification = "{} achete, {} offert".format(condition, cadeau)
+
+            print( prix_total, nv_prix - prix_total, justification)
+            return prix_total, nv_prix - prix_total, justification
 
         else:
             # Condition non satisfaite
-            return prix*quantite
+            return prix_total, 0, ''
 

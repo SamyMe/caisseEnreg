@@ -17,19 +17,22 @@ class Ticket():
                     article[0], article[1],
                     article[2], prix_qt)
 
+            remise = article[3]
+            justification = article[4]
+            if remise != 0:
+                output_str+="    PROMO: {}\n".format(justification)
+                output_str+="    remise: {:.2f}€\n\n".format(remise)
+
 
         output_str+="""\n ++ Total : {:.2f}€ ++ \n\n""".format(self.total)
         
         return output_str
         
 
-    def ajout(self, produit, quantite, prix):
+    def ajout(self, produit, quantite, prix, remise=0, justification=''):
         # Ajouter Article
-        self.articles.append((produit, quantite, prix))
-        self.total += quantite*prix
-
-    def ajout_remise(self, produit, remise, prix)
-        self.articles_remise.append((produit, remise, text_justification))
+        self.articles.append((produit, quantite, prix, remise, justification))
+        self.total += quantite*prix + remise
 
 
 if __name__=="__main__":
