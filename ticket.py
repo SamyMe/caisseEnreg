@@ -28,6 +28,9 @@ class Ticket():
         self.articles.append((produit, quantite, prix))
         self.total += quantite*prix
 
+    def ajout_remise(self, produit, remise, prix)
+        self.articles_remise.append((produit, remise, text_justification))
+
 
 if __name__=="__main__":
 

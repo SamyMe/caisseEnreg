@@ -46,7 +46,10 @@ class Caisse(object):
                     quantite = float(saisie[1])
                     prix = self.catalog_prix[produit]
                     
-                    ticket.ajout(produit, quantite, prix)
+                    if produit in self.catalog_remises:
+                        prix = self.appliquer_remises(produit, quantite, prix)
+                    else:
+                        ticket.ajout(produit, quantite, prix)
 
                 except ValueError:
                     print("[ERREUR]: Quantité mal introduite!!")
@@ -56,4 +59,20 @@ class Caisse(object):
                     print("[ERREUR]: Produit inconue!")
 
             i += 1
+
+
+    def appliquer_remises(self, produit, quantite, prix):
+        condition, cadreau = self.catalog_remises[produit]
+
+        if quantite > condition:
+            # Condition satisfaite
+            part_1 = condition*prix 
+
+            # Appliquer la reduction
+            part_2 = ((quantite-condition) - cadeau)*prix
+            return part_1 + (0 if part_2<0 else part2)
+
+        else:
+            # Condition non satisfaite
+            return prix*quantite
 
