@@ -106,3 +106,4 @@ class Caisse(object):
 
         self.catalog_prix, self.catalog_remises = self.catalog_manager.maj()
 
+

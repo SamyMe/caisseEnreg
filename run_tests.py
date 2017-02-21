@@ -10,13 +10,20 @@ def test_catalogue():
     catalog = Catalogue(prix_file="test_data/prix.csv", remises_file="test_data/remises.csv")
     catalog_prix, catalog_remises = catalog.get_dicts()
 
-    print("Liste des prix:")
+    print("- Liste des prix:")
     print(catalog_prix)
-    print("Liste des promo:")
+    print("- Liste des promo:")
     print(catalog_remises)
 
     print("--- MAJ catalogue ---")
-    catalog.maj()
+    catalog_prix, catalog_remises = catalog.maj(prix_file='test_data/prix2.csv',
+                                                remises_file='test_data/remises2.csv')
+
+    print("- Liste des prix:")
+    print(catalog_prix)
+    print("- Liste des promo:")
+    print(catalog_remises)
+
 
 
 # ------ TICKET --------

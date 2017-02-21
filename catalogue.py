@@ -20,7 +20,8 @@ class Catalogue(object):
 
 
     def _lire_prix(self,):
-        """ Lecture du fichier contenant les produits.
+        """
+            Lecture du fichier contenant les produits.
             Le fichier est donné en argument lors de la 
             creation de l'instance du Catalogue. 
         """
@@ -48,7 +49,8 @@ class Catalogue(object):
 
 
     def _lire_remises(self,):
-        """ Lecture du fichier contenant les remises.
+        """ 
+            Lecture du fichier contenant les remises.
             Le fichier est donné en argument lors de la 
             creation de l'instance du Catalogue. 
         """
@@ -75,12 +77,23 @@ class Catalogue(object):
                     print("[ERREUR CATALOGUE]: Produit '{}' dupliqué!".format(produit))
 
 
-    def maj(self,):
+    def maj(self, prix_file=None, remises_file=None):
         """
             Mise a jour du catalogue.
-            Relire les fichiers defini dans:
-            self.prix_file et self.remises_file 
+            Relire les fichiers defin par les parametres
+            ou stoqués dans: self.prix_file et self.remises_file 
+
+            :type prix_file: string
+            :param produit: chemain vers fichier prix
+
+            :type remise_file: string
+            :param produit: chemain vers fichier remise
         """
+        if prix_file:
+            self.prix_file = prix_file
+        if remises_file:
+            self.remises_file = remises_file
+
         self.prix = {}
         self.remises = {}
 
