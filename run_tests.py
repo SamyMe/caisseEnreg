@@ -9,10 +9,14 @@ from catalogue import Catalogue
 def test_catalogue():
     catalog = Catalogue(prix_file="test_data/prix.csv", remises_file="test_data/remises.csv")
     catalog_prix, catalog_remises = catalog.get_dicts()
+
     print("Liste des prix:")
     print(catalog_prix)
     print("Liste des promo:")
     print(catalog_remises)
+
+    print("--- MAJ catalogue ---")
+    catalog.maj()
 
 
 # ------ TICKET --------
@@ -35,7 +39,10 @@ def test_caisse():
     print("--- Initialisation ---")
     caisse = Caisse()
 
-    print("--- Calcule total ---")
+    print("--- MAJ catalogue ---")
+    caisse.maj()
+
+    print("--- Introduction Ticket ---")
     caisse.introduction_ticket()
 
 
@@ -46,10 +53,11 @@ if __name__=="__main__":
             "catalogue": test_catalogue
             }
 
-    try:
-        arg = sys.argv[1].lower()
-        test[arg]()
-    except:
+    arg = sys.argv[1].lower()
+
+    if arg not in test:
         print("Usage: python run_tests.py [caisse|ticket|catalogue]")
+    else:
+        test = test[arg]()
 
 

@@ -13,6 +13,9 @@ class Catalogue(object):
 
 
     def get_dicts(self):
+        """
+             Retourne les catalogues de prix et remises
+        """
         return self.prix, self.remises
 
 
@@ -71,3 +74,16 @@ class Catalogue(object):
                 except KeyError:
                     print("[ERREUR CATALOGUE]: Produit '{}' dupliqué!".format(produit))
 
+
+    def maj(self,):
+        """
+            Mise a jour du catalogue.
+            Relire les fichiers defini dans:
+            self.prix_file et self.remises_file 
+        """
+        self.prix = {}
+        self.remises = {}
+
+        self._lire_prix()
+        self._lire_remises()
+        return self.prix, self.remises

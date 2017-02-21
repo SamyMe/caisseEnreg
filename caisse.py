@@ -6,12 +6,17 @@ class Caisse(object):
     
     def __init__(self, prix_file="test_data/prix.csv",
                         remises_file="test_data/remises.csv"):
-        catalog = Catalogue(prix_file, remises_file)
-        self.catalog_prix, self.catalog_remises = catalog.get_dicts()
+
+        self.catalog_manager = Catalogue(prix_file, remises_file)
+        self.catalog_prix, self.catalog_remises = self.catalog_manager.get_dicts()
         self.tickets = []
 
 
     def introduction_ticket(self,):
+        """
+            Lecture du contenue du cady.
+            La saisie se fait via clavier. 
+        """
         print('\n* Début de saisie...')
         print("""
                 Veuillez entrer les produits sous la forme:
@@ -41,7 +46,7 @@ class Caisse(object):
                 saisie = saisie.split(',')
 
                 try:
-
+                    # Traitement de la saisie
                     produit = saisie[0]
                     quantite = float(saisie[1])
                     prix_u = self.catalog_prix[produit]
@@ -66,6 +71,19 @@ class Caisse(object):
 
 
     def appliquer_remises(self, produit, quantite, prix_u):
+        """
+            Calcule de la remise sur un produit donné
+         
+            :type produit: string
+            :param produit: nom du produit
+
+            :type quantite: float 
+            :param quantite: quantité acheté de produit
+
+            :type prix_u: float 
+            :param data: prix unitaire de produit   
+        """
+
         condition, cadeau = self.catalog_remises[produit]
         prix_total = prix_u*quantite
         remise = 0
@@ -79,4 +97,12 @@ class Caisse(object):
         justification = "{} acheté(s), {} offert".format(condition, cadeau)
 
         return -remise, justification
+
+
+    def maj(self):
+        """
+            Mise a jour des donnée de la caisse.
+        """
+
+        self.catalog_prix, self.catalog_remises = self.catalog_manager.maj()
 
