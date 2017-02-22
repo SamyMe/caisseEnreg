@@ -97,6 +97,7 @@ class Catalogue(object):
         self.prix = {}
         self.remises = {}
 
+        # Lecture des fichiers
         self._lire_prix()
         self._lire_remises()
         return self.prix, self.remises

@@ -11,11 +11,11 @@ if __name__=="__main__":
  *** Bienvenue dans le système de gestion de caisse. *** """)
 
     menu = """
-    ------------------------------------------
+    ----------------- MENU --------------------
     1: Calculer total d'un cady
     2: Mettre à jour les fichiers de catalogue 
     3: sortire du programme
-    ------------------------------------------
+    -------------------------------------------
     """
 
     prog_active = True
