@@ -18,11 +18,12 @@ class Caisse(object):
             Lecture du contenue du cady.
             La saisie se fait via clavier. 
         """
+
         print('\n* Début de saisie...')
         print("""
-                Veuillez entrer les produits sous la forme:
-                NomDuProduit  NombreDeKilo
-                et taper fin pour terminer la saisie.
+    Veuillez entrer les produits sous la forme:
+    NomDuProduit  NombreDeKilo
+    et taper fin pour terminer la saisie.
                """)
 
         end_saisie = False
@@ -32,7 +33,7 @@ class Caisse(object):
 
         # Boucler sur l'introduction des articles
         while not end_saisie==True:
-            saisie = input('Article n°{}: '.format(i))
+            saisie = input(' Article n°{}: '.format(i))
 
             if 'fin' == saisie.lower():
                 # Fin de saisie du ticket

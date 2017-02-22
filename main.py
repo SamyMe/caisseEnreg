@@ -1,17 +1,14 @@
 from caisse import Caisse
 
 if __name__=="__main__":
-    print("Lancement de la caisse:")
-    caisse = Caisse()
 
-    actions = { 1: caisse.introduction_ticket,
-                2: caisse.maj
+    caisse = Caisse()
+    actions = { '1': caisse.introduction_ticket,
+                '2': caisse.maj
                 }
 
-
     print("""
-    Bienvenue dans le système de gestion de caisse.
-    Choix:""")
+ *** Bienvenue dans le système de gestion de caisse. *** """)
 
     menu = """
     ------------------------------------------
@@ -22,12 +19,13 @@ if __name__=="__main__":
     """
 
     prog_active = True
-    while(prog_active = True)
-        choix = input(menu)
-        if choix == 3:
+    while(prog_active == True):
+        print(menu)
+        choix = input(' choix:')
+        if choix == '3':
             prog_active = False
-        elif choix not in actions:
-            print("Usage: python run_tests.py [caisse|ticket|catalogue]")
+        elif choix not in actions.keys():
+            print("[ERREUR] choix erroné!")
         else:
             actions[choix]()
 
