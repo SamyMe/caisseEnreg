@@ -25,7 +25,6 @@ def test_catalogue():
     print(catalog_remises)
 
 
-
 # ------ TICKET --------
 def test_ticket():
     print("- Ticket initialisation")
@@ -60,8 +59,10 @@ if __name__=="__main__":
             "catalogue": test_catalogue
             }
 
-    arg = sys.argv[1].lower()
+    arg = ''
 
+    if len(sys.argv)>1:
+        arg = sys.argv[1].lower()
     if arg not in test:
         print("Usage: python run_tests.py [caisse|ticket|catalogue]")
     else:
